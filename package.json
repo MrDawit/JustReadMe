@@ -1,0 +1,25 @@
+{
+  "name": "justreadme",
+  "version": "1.0.0",
+  "description": "readme file creater package",
+  "main": "index.js",
+  "scripts": {
+    "test": "(test.js)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrDawit/JustReadMe.git"
+  },
+  "keywords": [
+    "readme"
+  ],
+  "author": "Shalom Dawit",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MrDawit/JustReadMe/issues"
+  },
+  "homepage": "https://github.com/MrDawit/JustReadMe#readme",
+  "dependencies": {
+    "inquirer": "^6.5.0"
+  }
+}
