@@ -111,7 +111,7 @@ inquirer.prompt([
     fs.appendFileSync(filename, "* " + singleNote[i].replace(/\s/g, '') + " \r\n");
   };
 
-  fs.appendFileSync(filename, "\n## Created By  \r\n" + data.name + " \r\n Github Repository: " + data.githubRepo + " \r\n\n Email: " + data.contact);
+  fs.appendFileSync(filename, "\n## Created By  \r\n" + data.name + "\r\n[Github Repository: ](" + data.githubRepo + ")\r\n\n[Email: ](" + data.contact +")");
 
   console.log("SUCCESS!")
 });
