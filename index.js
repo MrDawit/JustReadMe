@@ -91,14 +91,16 @@ inquirer.prompt([
 ]).then(function (data) {
 //variables
   var filename = data.name.toLowerCase().split(' ').join('') + ".md";
+  var badge = "![License: " + data.license + "](https://img.shields.io/badge/License-" + data.license + "-red.svg)";
   var singleImage = data.images.split(",");
   var singleContributor = data.contributors.split(",");
   var singleContributorLink = data.contributors_links.split(",");
   var singleTest = data.tests.split(",");
   var singleInstall = data.install.split(",");
   var singleUsage = data.usage.split(",");
-//create readme file, include title and short description
-  fs.writeFileSync(filename, "# Title: " + JSON.stringify(data.projectName, null).replace(/"/g, '').replace(/\s/g, '') + "\r\n" + data.descriptionShort + "\r\n\n");
+
+//create readme file, include license badge, title and short description
+  fs.writeFileSync(filename, badge + "\r\n# Title: " + JSON.stringify(data.projectName, null).replace(/"/g, '').replace(/\s/g, '') + "\r\n" + data.descriptionShort + "\r\n\n");
 //add the live link to file
   if (data.liveLink_yes) {
     fs.appendFileSync(filename, "\t![Live Link: ](" + data.liveLink + ") \r\n\n");
@@ -124,7 +126,7 @@ inquirer.prompt([
   for (var i = 0; i < singleImage.length; i++) {
     fs.appendFileSync(filename, "\t ![Image](img src='" + singleImage[i].replace(/\s/g, '') + "')  \r\n\n");
   };
-  
+  //add licence
   if (data.license = "MIT") {
     fs.appendFileSync(filename, "\n## License \r\n\t* Licensed under the ![MIT](" + data.license_address + ") license.");
   }
@@ -134,7 +136,7 @@ inquirer.prompt([
   if (data.license = "other") {
     fs.appendFileSync = (filename, "\n## License \r\n\t* Licensed under the ![" + data.other + "](" + data.license_address + ") license.");
   };
-
+//add contributors
   fs.appendFileSync(filename, "\n## Contributing \r\n" + data.name + "\r\n\t![Github Repository: ](" + data.githubRepo + ")\r\n\t![Email: ]<" + data.contact + ">\r\n\t## Contributors \r\n");
 
   if (singleContributor == null || undefined) {
@@ -148,7 +150,7 @@ inquirer.prompt([
   for (var i = 0; i < singleContributorLink.length; i++) {
     fs.appendFileSync(filename, "\t* " + singleContributorLink[i].replace(/\s/g, '') + " \r\n");
   };
-
+//add tests
 fs.appendFileSync(filename, "## Tests \r\n");
   if (singleTest == null || undefined) {
     fs.appendFileSync(filename, "\t* none \r\n");
@@ -156,10 +158,10 @@ fs.appendFileSync(filename, "## Tests \r\n");
   for (var i = 0; i < singleTest.length; i++) {
     fs.appendFileSync(filename, "\t* " + singleTest[i].replace(/\s/g, '') + " \r\n");
   };
-
+//add questions section
   fs.appendFileSync(filename, "## Questions \r\n" + "Send questions to: ![Email: ]<" + data.contact + ">\r\n");
 
 
 
-  console.log("SUCCESS!");
+  console.log("Your ReadMe file should be in this project's root directory!");
 });
