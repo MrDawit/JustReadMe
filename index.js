@@ -30,47 +30,58 @@ inquirer.prompt([
   {
     type: "input",
     name: "liveLink",
-    message: "What is the project's live link?"
+    message: "What is the project's live link (e.g.-'http:\\UserName.github.io\index.html')?"
   },
   {
     type: "input",
-    name: "image",
-    message: "what is the local location of your image?"
+    name: "images",
+    message: "what are the local locations of your individual images (separate with a comma. e.g.-'.\assests\image.png, .\assets\image2.png')?"
   },
   {
     type: "input",
-    name: "files",
-    message: "What is the name of the files you want to mention in the README(separate using a comma)?"
+    name: "install",
+    message: "What are your notes on how to install this project (separate with a comma)?"
   },
   {
     type: "input",
-    name: "notes",
-    message: "what notes do you want included (separate using a comma)?"
+    name: "usage",
+    message: "What are your notes on how to use this project (separate with a comma)?"
+  },
+  {
+    type: "input",
+    name: "contributors",
+    message: "Who else is contributing to this project (separate with a comma)?"
+  },
+  {
+    type: "input",
+    name: "contributors_links",
+    message: "What contributing links do you want to include for this project (separate with a comma)?"
   },
   {
     type: "checkbox",
-    message: "What technologies were used?",
-    name: "stack",
+    message: "Which license do you have for this project?",
+    name: "licence",
     choices: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "MySQL",
-      "Bootstrap",
-      "Jquery",
-      "Node.js",
-      "DOM"
+      "MIT",
+      "GNU AGPLv3",
+      "other",
+      "none"
     ]
   },
   {
     type: "input",
-    name: "addTech",
-    message: "Add any other technologies:"
+    name: "other",
+    message: "What type of license do you have, if you selected 'other' from the previous question?"
   },
   {
     type: "input",
-    message: "What is your Github repository address?",
+    name: "license_address",
+    message: "Where is the license file for this project (e.g.-'.\license.txt')?"
+  },
+  {
+    type: "input",
     name: "githubRepo",
+    message: "What is your Github repository address?",
   },
   {
     type: "input",
@@ -78,40 +89,77 @@ inquirer.prompt([
     message: "What is your email address?"
   }
 ]).then(function (data) {
-
+//variables
   var filename = data.name.toLowerCase().split(' ').join('') + ".md";
-  var singleFile = data.files.split(",");
-  var singleNote = data.notes.split(",");
-  var singleAddTech = data.addTech.split(",");
-  fs.writeFileSync(filename, "# " + JSON.stringify(data.projectName, null).replace(/"/g, '') + "\r\n" + data.descriptionShort + "\r\n\n");
-
+  var singleImage = data.images.split(",");
+  var singleContributor = data.contributors.split(",");
+  var singleContributorLink = data.contributors_links.split(",");
+  var singleTest = data.tests.split(",");
+  var singleInstall = data.install.split(",");
+  var singleUsage = data.usage.split(",");
+//create readme file, include title and short description
+  fs.writeFileSync(filename, "# Title: " + JSON.stringify(data.projectName, null).replace(/"/g, '').replace(/\s/g, '') + "\r\n" + data.descriptionShort + "\r\n\n");
+//add the live link to file
   if (data.liveLink_yes) {
-    fs.appendFileSync(filename, "[Live Link:](" + data.liveLink + ") \r\n\n");
+    fs.appendFileSync(filename, "\t![Live Link: ](" + data.liveLink + ") \r\n\n");
   };
-
-  fs.appendFileSync(filename, "\t <img src='" + data.image + "' >  \r\n\n" + "## Description \r\n" + data.descriptionLong + " \r\n\n## Files \r\n");
-
-  for (var i = 0; i < singleFile.length; i++) {
-    fs.appendFileSync(filename, "* " + singleFile[i].replace(/\s/g, '') + " \r\n")
+//add the full description and table of contents
+  fs.appendFileSync(filename, "## Description \r\n" + data.descriptionLong + " \r\n\n## Table of Contents \r\n\t [Installation](#installation) \n\t [Usage](#usage) \n\t [License](#license) \n\t [Contributing](#contributing) \n\t [Tests](#tests) \n\t [Questions](#questions) \n\n");
+//add install notes
+  fs.appendFileSync(filename, "## Install \r\n");
+  if (singleInstall == null || undefined) {
+    fs.appendFileSync(filename, "\t* none \r\n");
+  }
+  for (var i = 0; i < singleInstall.length; i++) {
+    fs.appendFileSync(filename, "\t* " + singleInstall[i].replace(/\s/g, '') + " \r\n")
+  };
+//add usage notes including pics
+  fs.appendFileSync(filename, "## Usage \r\n");
+  if (singleUsage == null || undefined) {
+    fs.appendFileSync(filename, "\t* none \r\n");
+  }
+  for (var i = 0; i < singleUsage.length; i++) {
+    fs.appendFileSync(filename, "\t* " + singleUsage[i].replace(/\s/g, '') + " \r\n")
+  };
+  for (var i = 0; i < singleImage.length; i++) {
+    fs.appendFileSync(filename, "\t ![Image](img src='" + singleImage[i].replace(/\s/g, '') + "')  \r\n\n");
   };
   
-  fs.appendFileSync(filename, "\n## Technologies Used \r\n");
-
-  for (var i = 0; i < data.stack.length; i++) {
-    fs.appendFileSync(filename, "* " + data.stack[i].replace(/\s/g, '') + " \r\n");
+  if (data.license = "MIT") {
+    fs.appendFileSync(filename, "\n## License \r\n\t* Licensed under the ![MIT](" + data.license_address + ") license.");
+  }
+  if (data.license = "GNU AGPLv3") {
+    fs.appendFileSync = (filename, "\n## License \r\n\t* Licensed under the ![GNU AGPLv3](" + data.license_address + ") license.");
+  };
+  if (data.license = "other") {
+    fs.appendFileSync = (filename, "\n## License \r\n\t* Licensed under the ![" + data.other + "](" + data.license_address + ") license.");
   };
 
-  for (var i = 0; i < singleAddTech.length; i++) {
-    fs.appendFileSync(filename, "* " + singleAddTech[i].replace(/\s/g, '') + " \r\n");
+  fs.appendFileSync(filename, "\n## Contributing \r\n" + data.name + "\r\n\t![Github Repository: ](" + data.githubRepo + ")\r\n\t![Email: ]<" + data.contact + ">\r\n\t## Contributors \r\n");
+
+  if (singleContributor == null || undefined) {
+    fs.appendFileSync(filename, "\t* none \r\n");
+  }
+  for (var i = 0; i < singleContributor.length; i++) {
+    fs.appendFileSync(filename, "\t* " + singleContributor[i].replace(/\s/g, '') + " \r\n");
+  }; 
+
+  fs.appendFileSync(filename, "\r\n");
+  for (var i = 0; i < singleContributorLink.length; i++) {
+    fs.appendFileSync(filename, "\t* " + singleContributorLink[i].replace(/\s/g, '') + " \r\n");
   };
 
-  fs.appendFileSync(filename, "\n## Notes \r\n");
-
-  for (var i = 0; i < singleNote.length; i++) {
-    fs.appendFileSync(filename, "* " + singleNote[i].replace(/\s/g, '') + " \r\n");
+fs.appendFileSync(filename, "## Tests \r\n");
+  if (singleTest == null || undefined) {
+    fs.appendFileSync(filename, "\t* none \r\n");
+  }
+  for (var i = 0; i < singleTest.length; i++) {
+    fs.appendFileSync(filename, "\t* " + singleTest[i].replace(/\s/g, '') + " \r\n");
   };
 
-  fs.appendFileSync(filename, "\n## Created By  \r\n" + data.name + "\r\n[Github Repository: ](" + data.githubRepo + ")\r\n\n[Email: ](" + data.contact +")");
+  fs.appendFileSync(filename, "## Questions \r\n" + "Send questions to: ![Email: ]<" + data.contact + ">\r\n");
 
-  console.log("SUCCESS!")
+
+
+  console.log("SUCCESS!");
 });
