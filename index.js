@@ -96,7 +96,7 @@ inquirer.prompt([
 ]).then(function (data) {
   //variables
   var filename = data.name.toLowerCase().split(' ').join('') + ".md";
-  var badge = "![License: " + data.license + "](https://img.shields.io/badge/License-" + data.license + "-red.svg)";
+  var badge = "![License: " + data.license + "](https://img.shields.io/badge/License-" + data.license.replace(/\s/g, '-') + "-red.svg)";
   var singleImage = data.images.split(",");
   var singleContributor = data.contributors.split(",");
   var singleContributorLink = data.contributors_links.split(",");
@@ -110,11 +110,11 @@ inquirer.prompt([
 
   //add the live link to file
   if (data.liveLink_yes) {
-    fs.appendFileSync(filename, "![Live Link: ](" + data.liveLink + ") \r\n\n");
+    fs.appendFileSync(filename, "Live Link: " + data.liveLink + " \r\n\n");
   };
   //add the full description and table of contents
   fs.appendFileSync(filename, "## Description \r\n" + data.descriptionLong 
-  + " \r\n\n## Table of Contents \r\n [Installation](#installation) \n [Usage](#usage) \n [License](#license) \n [Contributor's Links](#contributor's_links) \n [Contributors](#contributors) \n  [Tests](#tests) \n [Questions](#questions) \n\n");
+  + " \r\n\n## Table of Contents \r\n - [Installation](#installation) \n - [Usage](#usage) \n - [License](#license) \n - [Contributor's Links](#contributor's_links) \n - [Contributors](#contributors) \n\n - [Tests](#tests) \n - [Questions](#questions) \n\n");
 
   //add install notes
   fs.appendFileSync(filename, "## Install \r\n");
@@ -133,7 +133,7 @@ inquirer.prompt([
     fs.appendFileSync(filename, "* " + singleUsage[i] + " \r\n")
   };
   for (var i = 0; i < singleImage.length; i++) {
-    fs.appendFileSync(filename, "\t![Image](img src='" + singleImage[i].replace(/\s/g, '') + "')  \r\n\n");
+    fs.appendFileSync(filename, "\t![Image" + i + "](" + singleImage[i].replace(/\s/g, '') + ")  \r\n\n");
   };
   //add licence
   switch (data.license) {
@@ -150,8 +150,8 @@ inquirer.prompt([
       fs.appendFileSync(filename, "\n## License \r\n* Licensed under the ![...]( ... ) license.");
   }
   //add contributors
-  fs.appendFileSync(filename, "\n## Contributor's links \r\n" + data.name + "\r\n![Github Repository: ](" 
-  + data.githubRepo + ")\r\n![Email: ]<" + data.contact + ">\r\n## Contributors \r\n");
+  fs.appendFileSync(filename, "\n## Contributor's links \r\n" + data.name + "\r\nGithub Repository: " 
+  + data.githubRepo + "\r\nEmail: " + data.contact + "\r\n## Contributors \r\n");
 
   if (singleContributor == null || undefined) {
     fs.appendFileSync(filename, "* none \r\n");
@@ -174,7 +174,7 @@ inquirer.prompt([
     fs.appendFileSync(filename, "* " + singleTest[i] + " \r\n");
   };
   //add questions section
-  fs.appendFileSync(filename, "## Questions \r\n" + "Send questions to: ![Email: ]<" + data.contact + ">\r\n");
+  fs.appendFileSync(filename, "## Questions \r\n" + "Send questions to:\r\n Email: " + data.contact + "\r\n");
 
   console.log("Your ReadMe file should be in this project's root directory!");
 });

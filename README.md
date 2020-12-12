@@ -7,7 +7,7 @@
 # JustReadMe
 an app to help construct a trivial README file 
 
-Repository: https://MrDawit.github.io/JustReadMe 
+Repository: https://github.com/MrDawit/JustReadMe 
 Live Link: 
 
 <img src="#">
