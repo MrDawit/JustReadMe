@@ -150,8 +150,8 @@ inquirer.prompt([
       fs.appendFileSync(filename, "\n## License \r\n* Licensed under the ![...]( ... ) license.");
   }
   //add contributors
-  fs.appendFileSync(filename, "\n## Contributor's links \r\n" + data.name + "\r\nGithub Repository: " 
-  + data.githubRepo + "\r\nEmail: " + data.contact + "\r\n## Contributors \r\n");
+  fs.appendFileSync(filename, "\n## Contributor's links \r\n" + data.name + "\\nGithub Repository: " 
+  + data.githubRepo + "\\nEmail: " + data.contact + "\n## Other Contributors \r\n");
 
   if (singleContributor == null || undefined) {
     fs.appendFileSync(filename, "* none \r\n");
@@ -174,7 +174,7 @@ inquirer.prompt([
     fs.appendFileSync(filename, "* " + singleTest[i] + " \r\n");
   };
   //add questions section
-  fs.appendFileSync(filename, "## Questions \r\n" + "Send questions to:\r\n Email: " + data.contact + "\r\n");
+  fs.appendFileSync(filename, "## Questions \r\n" + "Send questions to:\\n Email: " + data.contact + "\r\n");
 
   console.log("Your ReadMe file should be in this project's root directory!");
 });

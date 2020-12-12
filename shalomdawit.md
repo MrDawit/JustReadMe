@@ -31,8 +31,8 @@ Readme files are sometimes long and tedius. Sometimes they are short and easy. S
 ## License 
 * Licensed under the ![GNU AGPLv3](.Gnu_Agplv3.txt) license.
 ## Contributor's links 
-ShalomDawit
-Github Repository: https://github.com/MrDawit/JustReadMe
+ShalomDawit\
+Github Repository: https://github.com/MrDawit/JustReadMe\
 Email: Shalom.Dawit@gmail.com
 ## Contributors 
 * none_other 
@@ -44,5 +44,5 @@ Email: Shalom.Dawit@gmail.com
 * Jest  
 * Otra-Test 
 ## Questions 
-Send questions to:
+Send questions to:\
  Email: Shalom.Dawit@gmail.com
