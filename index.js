@@ -1,5 +1,5 @@
-const inquirer = require("inquirer");
-const fs = require('fs');
+var inquirer = require("inquirer");
+var fs = require('fs');
 
 inquirer.prompt([
   {
@@ -30,22 +30,22 @@ inquirer.prompt([
   {
     type: "input",
     name: "liveLink",
-    message: "What is the project's live link (e.g.-'http:\\UserName.github.io\index.html')?"
+    message: "If yes, What is the project's live link (e.g.-'http:\\UserName.github.io\index.html')(otherwise,press ENTER)?"
   },
   {
     type: "input",
     name: "images",
-    message: "what are the local locations of your individual images (separate with a comma. e.g.-'.\assests\image.png, .\assets\image2.png')?"
+    message: "What are the local locations of your individual images (separate with a comma. e.g.-'.\assests\image.png, .\assets\image2.png')?"
   },
   {
     type: "input",
     name: "install",
-    message: "What are your notes on how to install this project (separate with a comma)?"
+    message: "What are your notes on how to INSTALL this project (separate with a comma)?"
   },
   {
     type: "input",
     name: "usage",
-    message: "What are your notes on how to use this project (separate with a comma)?"
+    message: "What are your notes on how to USE this project (separate with a comma)?"
   },
   {
     type: "input",
@@ -76,7 +76,7 @@ inquirer.prompt([
   {
     type: "input",
     name: "other",
-    message: "What type of license do you have, if you selected 'other' from the previous question?"
+    message: "if you selected 'other', what type of license do you have (otherwise,press ENTER)?"
   },
   {
     type: "input",
@@ -105,22 +105,24 @@ inquirer.prompt([
   var singleUsage = data.usage.split(",");
 
   //create readme file, include license badge, title and short description
-  fs.writeFileSync(filename, badge + "\r\n# Title: " + JSON.stringify(data.projectName, null).replace(/"/g, '').replace(/\s/g, '') + "\r\n" + data.descriptionShort + "\r\n\n");
-  //console.log("license TYPE AGAIN: "+data.license);
+  fs.writeFileSync(filename, badge + "\r\n# Title: " 
+  + JSON.stringify(data.projectName, null).replace(/"/g, '').replace(/\s/g, '') + "\r\n" + data.descriptionShort + "\r\n\n");
 
   //add the live link to file
   if (data.liveLink_yes) {
     fs.appendFileSync(filename, "![Live Link: ](" + data.liveLink + ") \r\n\n");
   };
   //add the full description and table of contents
-  fs.appendFileSync(filename, "## Description \r\n" + data.descriptionLong + " \r\n\n## Table of Contents \r\n [Installation](#installation) \n [Usage](#usage) \n [License](#license) \n [Contributing](#contributing) \n [Tests](#tests) \n [Questions](#questions) \n\n");
+  fs.appendFileSync(filename, "## Description \r\n" + data.descriptionLong 
+  + " \r\n\n## Table of Contents \r\n [Installation](#installation) \n [Usage](#usage) \n [License](#license) \n [Contributor's Links](#contributor's_links) \n [Contributors](#contributors) \n  [Tests](#tests) \n [Questions](#questions) \n\n");
+
   //add install notes
   fs.appendFileSync(filename, "## Install \r\n");
   if (singleInstall == null || undefined) {
     fs.appendFileSync(filename, "* none \r\n");
   };
   for (var i = 0; i < singleInstall.length; i++) {
-    fs.appendFileSync(filename, "* " + singleInstall[i].replace(/\s/g, '') + " \r\n")
+    fs.appendFileSync(filename, "* " + singleInstall[i] + " \r\n")
   };
   //add usage notes including pics
   fs.appendFileSync(filename, "## Usage \r\n");
@@ -128,7 +130,7 @@ inquirer.prompt([
     fs.appendFileSync(filename, "* none \r\n");
   };
   for (var i = 0; i < singleUsage.length; i++) {
-    fs.appendFileSync(filename, "* " + singleUsage[i].replace(/\s/g, '') + " \r\n")
+    fs.appendFileSync(filename, "* " + singleUsage[i] + " \r\n")
   };
   for (var i = 0; i < singleImage.length; i++) {
     fs.appendFileSync(filename, "\t![Image](img src='" + singleImage[i].replace(/\s/g, '') + "')  \r\n\n");
@@ -148,15 +150,15 @@ inquirer.prompt([
       fs.appendFileSync(filename, "\n## License \r\n* Licensed under the ![...]( ... ) license.");
   }
   //add contributors
-  fs.appendFileSync(filename, "\n## Contributor's links \r\n" + data.name + "\r\n![Github Repository: ](" + data.githubRepo + ")\r\n![Email: ]<" + data.contact + ">\r\n## Contributors \r\n");
-  //console.log("FILENAME: " + filename + " , DATA.NAME: " + data.name + " , DATA.GITHUBREPO: " + data.githubRepo + " , DATA.CONTACT: " + data.contact);
+  fs.appendFileSync(filename, "\n## Contributor's links \r\n" + data.name + "\r\n![Github Repository: ](" 
+  + data.githubRepo + ")\r\n![Email: ]<" + data.contact + ">\r\n## Contributors \r\n");
+
   if (singleContributor == null || undefined) {
     fs.appendFileSync(filename, "* none \r\n");
   };
 
   for (var i = 0; i < singleContributor.length; i++) {
-    fs.appendFileSync(filename, "* " + singleContributor[i].replace(/\s/g, '') + " \r\n");
-    //console.log("singleContributor.length: "+singleContributor.length);
+    fs.appendFileSync(filename, "* " + singleContributor[i]+ " \r\n");
   };
 
   fs.appendFileSync(filename, "\r\n");
@@ -169,7 +171,7 @@ inquirer.prompt([
     fs.appendFileSync(filename, "* none \r\n");
   };
   for (var i = 0; i < singleTest.length; i++) {
-    fs.appendFileSync(filename, "* " + singleTest[i].replace(/\s/g, '') + " \r\n");
+    fs.appendFileSync(filename, "* " + singleTest[i] + " \r\n");
   };
   //add questions section
   fs.appendFileSync(filename, "## Questions \r\n" + "Send questions to: ![Email: ]<" + data.contact + ">\r\n");

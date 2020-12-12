@@ -11,7 +11,8 @@ ronald
  [Installation](#installation) 
  [Usage](#usage) 
  [License](#license) 
- [Contributing](#contributing) 
+ [Contributor's Links](#contributor's_links)
+ [Contributors](#contributors) 
  [Tests](#tests) 
  [Questions](#questions) 
 
