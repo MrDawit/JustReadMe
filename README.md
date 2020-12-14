@@ -8,7 +8,7 @@
 an app to help construct a trivial README file using a NodeJS console
 
 App Walkthrough Link: https://drive.google.com/file/d/1dv_Y2-OLN9nQxgFMDew7FkChu4-gmHG4/view?usp=sharing \
-Repository Link: https://github.com/MrDawit/JustReadMe \ 
+Repository Link: https://github.com/MrDawit/JustReadMe 
 
 <img src="./assets/justreadme.gif">
 
