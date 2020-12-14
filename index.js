@@ -105,7 +105,7 @@ inquirer.prompt([
   var singleUsage = data.usage.split(",");
 
   //create readme file, include license badge, title and short description
-  fs.writeFileSync(filename, badge + "\r\n# Title: " 
+  fs.writeFileSync(filename, badge + "\r\n# " 
   + JSON.stringify(data.projectName, null).replace(/"/g, '').replace(/\s/g, '') + "\r\n" + data.descriptionShort + "\r\n\n");
 
   //add the live link to file

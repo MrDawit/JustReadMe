@@ -5,14 +5,12 @@
 
 
 # JustReadMe
-an app to help construct a trivial README file 
+an app to help construct a trivial README file using a NodeJS console
 
-Repository: https://github.com/MrDawit/JustReadMe 
-Live Link: 
+App Walkthrough Link: https://drive.google.com/file/d/1dv_Y2-OLN9nQxgFMDew7FkChu4-gmHG4/view?usp=sharing \
+Repository Link: https://github.com/MrDawit/JustReadMe \ 
 
-<img src="#">
-
-<img src="#">
+<img src="./assets/justreadme.gif">
 
 ## Description
 Readme files are sometimes long and tedius. Sometimes they are short and easy. Sometimes they are missing a whole lot of useful information that was just overlooked by the creater. For this reason, I have created an app that should make life easier for developers that need a general template of a README file that covers the most important parts of a README file that we sometimes forget (and go back to re-edit). 

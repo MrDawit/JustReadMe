@@ -1,8 +1,9 @@
 ![License: GNU AGPLv3](https://img.shields.io/badge/License-GNU-AGPLv3-red.svg)
-# Title: JustReadMe
-an app to help construct a trivial README file
+# JustReadMe
+an app to help construct a trivial README file using a NodeJS console
 
-Live Link: https://github.com/MrDawit/JustReadMe 
+Repository Link: https://github.com/MrDawit/JustReadMe 
+
 
 ## Description 
 Readme files are sometimes long and tedius. Sometimes they are short and easy. Sometimes they are missing a whole lot of useful information that was just overlooked by the creater. For this reason, I have created an app that should make life easier for developers that need a general template of a README file that covers the most important parts of a README file that we sometimes forget (and go back to re-edit). 
